@@ -13,23 +13,22 @@ np.random.seed(seed)
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-# flatten 28*28 images to a 784 vector for each image
+# Flatten 28*28 images to a 1D array
 num_pixels = X_train.shape[1] * X_train.shape[2]
 X_train = X_train.reshape(X_train.shape[0], num_pixels).astype('float32')
 X_test = X_test.reshape(X_test.shape[0], num_pixels).astype('float32')
 
-# normalize inputs
+# Normalize inputs
 X_train = X_train / 255
 X_test = X_test / 255
 
-# one hot encode outputs
 y_train = np_utils.to_categorical(y_train)
 y_test = np_utils.to_categorical(y_test)
 num_classes = y_test.shape[1]
 
 print X_test.shape
 
-# define baseline model
+# Define model
 def baseline_model():
     model = Sequential()
     model.add(Dense(num_pixels, input_dim=num_pixels, kernel_initializer='normal', activation='relu'))
